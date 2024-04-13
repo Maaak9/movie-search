@@ -17,7 +17,7 @@ const MovieCard = ({
       <div className="movie-card__img-container">
         <img
           alt="movie-poster"
-          src={movie.Poster}
+          src={movie.Poster !== 'N/A' ? movie.Poster : '/no-image.svg'}
         />
       </div>
     </div>
