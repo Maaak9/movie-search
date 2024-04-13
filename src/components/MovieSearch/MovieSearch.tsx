@@ -1,10 +1,12 @@
 import { debounce } from 'lodash';
 import { fetchMovies } from '../../api/api';
 import './MovieSearch.scss';
+import { $searchTerm } from '../../store/store';
 
 const MovieSearch = () => {
 
   const search = (searchTerm: string) => {
+    $searchTerm.set(searchTerm);
     fetchMovies(searchTerm);
   }
 
