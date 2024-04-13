@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import { fetchMovie, fetchMovies } from './api/api';
 import MovieCard from './components/MovieCard/MovieCard';
+import MovieSearch from './components/MovieSearch/MovieSearch';
 
 function App() {
-
-  useEffect(() => {
-    fetchMovies();
-    fetchMovie();
-  }, [])
 
   const movie = {
     "Title": "Harry Potter and the Deathly Hallows: Part 2",
@@ -21,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <h1>hello</h1>
+      <MovieSearch />
       <div style={{ width: "300px" }}>
         <MovieCard movie={movie} />
       </div>
