@@ -10,7 +10,7 @@ test('Renders MovieSearch component', () => {
     </MemoryRouter>
   );
 
-  const searchElement = screen.getByPlaceholderText('Search');
+  const searchElement = screen.getByPlaceholderText('Search for movie title');
   expect(searchElement).toBeInTheDocument();
 
   fireEvent.change(searchElement, { target: { value: 'Harry' }});

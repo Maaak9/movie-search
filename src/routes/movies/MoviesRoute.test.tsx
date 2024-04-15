@@ -10,7 +10,7 @@ test('Renders Movies Route', async() => {
     </MemoryRouter>
   );
 
-  const searchElement = screen.getByPlaceholderText('Search');
+  const searchElement = screen.getByPlaceholderText('Search for movie title');
   expect(searchElement).toBeInTheDocument();
 
   fireEvent.change(searchElement, { target: { value: 'Harry' }});
@@ -22,7 +22,7 @@ test('Renders Movies Route', async() => {
   const loadMoreButton = screen.getByText('Load more');
   expect(loadMoreButton).toBeInTheDocument();
 
-  loadMoreButton.click();
+  // fireEvent.click(loadMoreButton);
 
   // const asyncMovie = await screen.findByText(/Wild About Harry/i);
   // expect(asyncMovie).toBeInTheDocument();

@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import { SEARCH_TERM_QS, fetchMovies } from '../../api/api';
 import './MovieSearch.scss';
 import { useSearchParams } from 'react-router-dom';
@@ -13,7 +13,7 @@ const MovieSearch = () => {
     if (searchTerm) {
       fetchMovies(searchTerm);
     }
-  }, [])
+  })
 
   const search = (searchTerm: string) => {
     setSearchParams({ searchTerm });
@@ -30,7 +30,7 @@ const MovieSearch = () => {
     <div className="search">
       <input
         defaultValue={searchTerm || ''}
-        placeholder='Search'
+        placeholder='Search for movie title'
         onChange={onChangeSearch}
         className='search__input'
       />
