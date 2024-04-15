@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import MoviesRoute from './MoviesRoute';
 import { MemoryRouter } from 'react-router-dom';
-import { $movies } from '../../store/store';
 
 test('Renders Movies Route', async() => {
 
