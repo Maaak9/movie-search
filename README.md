@@ -1,7 +1,8 @@
 # Overview
 
 ## Description
-A simple movie search application using the https://www.omdbapi.com/ api.
+A simple movie search application using the https://www.omdbapi.com/ api. <br />
+Can be tested here https://movie-search-xi-woad.vercel.app/?searchTerm=harry
 
 ## Quickstart
 1. `npm i`
