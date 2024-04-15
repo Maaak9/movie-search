@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
 import { render, screen } from '@testing-library/react';
-import { $movies } from '../../store/store';
+import { $movieDetailsData, $movies, $totalMovieResults } from '../../store/store';
 import MovieGrid from './MovieGrid';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -79,6 +79,8 @@ const movies = [
 
 
 $movies.set(movies);
+// Mock that we have a load more button
+$totalMovieResults.set(20);
 
 test('Renders MovieGrid component', () => {
    render(
@@ -99,5 +101,4 @@ test('Renders MovieGrid component', () => {
 
   const loadMoreButton = screen.getByText('Load more');
   expect(loadMoreButton).toBeInTheDocument();
-
 });
