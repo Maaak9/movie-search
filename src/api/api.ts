@@ -1,6 +1,6 @@
 import { $movieDetailsData, $movies, $moviesErrorMsg, $totalMovieResults } from "../store/store";
 
-const API_URL = 'http://www.omdbapi.com/?apikey=2356a083';
+const API_URL = 'https://www.omdbapi.com/?apikey=2356a083';
 export const SEARCH_TERM_QS = 'searchTerm';
 
 // https://www.omdbapi.com/
