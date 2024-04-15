@@ -1,9 +1,10 @@
 
 .movie-card {
+  color: black;
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   padding: 12px;
-  cursor: pointer;
   
   &__info {
     margin-bottom: 8px;

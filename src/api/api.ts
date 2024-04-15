@@ -1,4 +1,4 @@
-import { $movies, $searchTerm, $totalMovieResults } from "../store/store";
+import { $movieDetailsData, $movies, $searchTerm, $totalMovieResults } from "../store/store";
 
 const API_URL = 'http://www.omdbapi.com/?apikey=2356a083';
 
@@ -29,11 +29,12 @@ export const loadMoreMovies = () => {
   })
 }
 
-export const fetchMovie = () => {
-  const movieId = 'tt1201607';
+export const fetchMovie = (movieId: string) => {
   fetch(`${API_URL}&i=${movieId}`).then((res) => {
     res.json().then((json) => {
-        console.log('Movie', json);
+      if (json.Response === 'True') {
+        $movieDetailsData.set(json);
+      }
     })
   })
 }

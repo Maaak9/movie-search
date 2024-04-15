@@ -1,12 +1,21 @@
 import { debounce } from 'lodash';
 import { fetchMovies } from '../../api/api';
 import './MovieSearch.scss';
-import { $searchTerm } from '../../store/store';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MovieSearch = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchTerm = searchParams.get('searchTerm');
+
+  useEffect(() => {
+    if (searchTerm) {
+      fetchMovies(searchTerm);
+    }
+  }, [])
 
   const search = (searchTerm: string) => {
-    $searchTerm.set(searchTerm);
+    setSearchParams({ searchTerm });
     fetchMovies(searchTerm);
   }
 
@@ -19,6 +28,7 @@ const MovieSearch = () => {
   return (
     <div className="search">
       <input
+        defaultValue={searchTerm || ''}
         placeholder='Search'
         onChange={onChangeSearch}
         className='search__input'
