@@ -20,7 +20,7 @@ const MovieSearch = () => {
     fetchMovies(searchTerm);
   }
 
-  const debouncedSearch = debounce(search, 300);
+  const debouncedSearch = debounce(search, 500);
 
   const onChangeSearch = (e: React.FormEvent<HTMLInputElement>) => {
     debouncedSearch(e.currentTarget.value)

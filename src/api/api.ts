@@ -1,4 +1,4 @@
-import { $movieDetailsData, $movies, $totalMovieResults } from "../store/store";
+import { $movieDetailsData, $movies, $moviesErrorMsg, $totalMovieResults } from "../store/store";
 
 const API_URL = 'http://www.omdbapi.com/?apikey=2356a083';
 export const SEARCH_TERM_QS = 'searchTerm';
@@ -10,7 +10,13 @@ export const fetchMovies = (searchTerm: string) => {
     res.json().then((json) => {
       if (json.Response === 'True') {
         $totalMovieResults.set(json.totalResults)
+        $moviesErrorMsg.set('');
         $movies.set(json.Search);
+      }
+      if (json.Response === 'False') {
+        $movies.set([]);
+        $totalMovieResults.set(0)
+        $moviesErrorMsg.set(json.Error);
       }
     })
   })
