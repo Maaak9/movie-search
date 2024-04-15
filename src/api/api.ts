@@ -11,7 +11,6 @@ export const fetchMovies = (searchTerm: string) => {
       if (json.Response === 'True') {
         $totalMovieResults.set(json.totalResults)
         $movies.set(json.Search);
-        console.log('Movies', json);
       }
     })
   })
