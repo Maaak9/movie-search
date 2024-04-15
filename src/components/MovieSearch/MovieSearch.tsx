@@ -1,14 +1,15 @@
 import { debounce } from 'lodash';
-import { fetchMovies } from '../../api/api';
+import { SEARCH_TERM_QS, fetchMovies } from '../../api/api';
 import './MovieSearch.scss';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const MovieSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const searchTerm = searchParams.get('searchTerm');
+  const searchTerm = searchParams.get(SEARCH_TERM_QS);
 
   useEffect(() => {
+    // If we have an initial search term we perform that search.
     if (searchTerm) {
       fetchMovies(searchTerm);
     }
