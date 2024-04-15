@@ -10,7 +10,7 @@ export type Movie = {
 export type Rating = {
   Source?: string,
   /** rating as a string with this format: 5.7/10 */
-  value?: string,
+  Value?: string,
 }
 
 export type MovieDetails = {
