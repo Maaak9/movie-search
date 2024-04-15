@@ -1,3 +1,30 @@
+# Overview
+
+## Description
+A simple movie search application using the https://www.omdbapi.com/ api.
+
+## Quickstart
+1. `npm i`
+2. `npm run start`
+
+To run tests: `npm run test`
+to run webpack analyzer: `analyze`
+
+## Design choice
+Based on Create react app [Create React App](https://github.com/facebook/create-react-app)
+Using React router to keep track of 2 routes. One for the search where the search term i stored as a querystring to be able to link to an active search.
+And one for the movie details where some additional information is displayed using a Material ui dialog. (The movie details is a child route to the root)
+To keep track of state i used nanostore a tiny state manager that uses an atomic state management. Its small and simple and and fits this smaller project in my opinion.
+
+## Deps added 
+Deps added 
+* Nanostores
+* React router
+* Material ui
+* Sass
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
