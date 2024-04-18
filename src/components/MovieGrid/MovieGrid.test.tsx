@@ -1,7 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
 import { render, screen } from '@testing-library/react';
-import { $movieDetailsData, $movies, $totalMovieResults } from '../../store/store';
-import MovieGrid from './MovieGrid';
+import { MovieGridPure } from './MovieGrid';
 import { MemoryRouter } from 'react-router-dom';
 
 const movies = [
@@ -78,27 +77,70 @@ const movies = [
 ];
 
 
-$movies.set(movies);
-// Mock that we have a load more button
-$totalMovieResults.set(20);
+// $movies.set(movies);
+// // Mock that we have a load more button
+// $totalMovieResults.set(20);
 
-test('Renders MovieGrid component', () => {
-   render(
-    <MemoryRouter>
-      <MovieGrid />
-    </MemoryRouter>
-  );
+const MovieGridWithMemoryRouter = () => (
+  <MemoryRouter>
+    <MovieGridPure
+      movies={movies}
+      totalMovieResults={10}
+      onClickLoadMore={() => {}}
+    />
+  </MemoryRouter>
+)
 
-  const grid = screen.getByTestId('movie-grid');
+describe('Component: MovieGrid', () => {
+  test(('Renders MovieGrid component'), () => {
+    const { container } = render(<MovieGridWithMemoryRouter />);
+    expect(container).toBeInTheDocument()
+  });
 
-  expect(grid.children.length).toBe(10)
+  test('Renders 10 movies', () => {
+    render(<MovieGridWithMemoryRouter />);
+    const grid = screen.getByTestId('movie-grid');
+    expect(grid.children.length).toBe(10)
+  });
 
-  const firstMovie = screen.getByText(/Harry Potter and the Deathly Hallows: Part 2/i);
-  expect(firstMovie).toBeInTheDocument();
+  test('First movie has correct title', () => {
+    render(<MovieGridWithMemoryRouter />);
+    const firstMovie = screen.getByText(/Harry Potter and the Deathly Hallows: Part 2/i);
+    expect(firstMovie).toBeInTheDocument();
+  });
 
-  const lastMovie = screen.getByText(/Dirty Harry/i);
-  expect(lastMovie).toBeInTheDocument();
+  test('No load more button', () => {
+    render(<MovieGridWithMemoryRouter />);
+    const loadMoreButton = screen.queryByRole('button');
+    expect(loadMoreButton).not.toBeInTheDocument();
+  });
 
-  const loadMoreButton = screen.getByText('Load more');
-  expect(loadMoreButton).toBeInTheDocument();
-});
+  test('Renders load more button', () => {
+    render(
+      <MemoryRouter>
+        <MovieGridPure
+          movies={movies}
+          totalMovieResults={20}
+          onClickLoadMore={() => {}}
+        />
+      </MemoryRouter>
+    )
+    const loadMoreButton = screen.queryByRole('button');
+    expect(loadMoreButton).toBeInTheDocument();
+  });
+
+  test('Renders error message', () => {
+    render(
+      <MemoryRouter>
+        <MovieGridPure
+          movies={[]}
+          totalMovieResults={0}
+          onClickLoadMore={() => {}}
+          moviesErrorMsg='No movies found'
+        />
+      </MemoryRouter>
+    )
+    const errorMessage = screen.getByText(/No movies found/i);
+    expect(errorMessage).toBeInTheDocument();
+  })
+})

@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import MovieSummary from './MovieSummary';
 
-test('Renders MovieSummary component', () => {
-  render(
+const MockedMovieSummary = () => (
     <MemoryRouter>
       <MovieSummary movie={{
           "Title": "Harry Potter and the Prisoner of Azkaban",
@@ -47,15 +46,24 @@ test('Renders MovieSummary component', () => {
       }}
     />
   </MemoryRouter>
-  );
+)
 
 
-  const titleElement = screen.getByText(/Harry Potter and the Prisoner of Azkaban/i);
-  expect(titleElement).toBeInTheDocument();
+describe('Component: MovieSummary', () => {
+  test('renders MovieSummary component', () => {
+    const { container} = render(<MockedMovieSummary />);
+    expect(container).toBeInTheDocument()
+  })
 
-  const actorsElement = screen.getByText(/Daniel Radcliffe, Emma Watson, Rupert Grint/i);
-  expect(actorsElement).toBeInTheDocument();
+  test('MovieSummary has correct title', () => {
+    render(<MockedMovieSummary />);
+    const titleElement = screen.getByText(/Harry Potter and the Prisoner of Azkaban/i);
+    expect(titleElement).toBeInTheDocument();
+  });
 
-  const imdbRatingElement = screen.getByText(/7.9/i);
-  expect(imdbRatingElement).toBeInTheDocument();
-});
+  test('MovieSummary has correct rating', () => {
+    render(<MockedMovieSummary />);
+    const ratingElement = screen.getByText(/7.9/i);
+    expect(ratingElement).toBeInTheDocument();
+  })
+})

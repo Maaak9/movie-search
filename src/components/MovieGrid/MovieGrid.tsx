@@ -3,6 +3,7 @@ import MovieCard from '../MovieCard/MovieCard';
 import './MovieGrid.scss';
 import { $movies, $moviesErrorMsg, $totalMovieResults } from '../../store/store';
 import { loadMoreMovies } from '../../api/api';
+import { Movie } from '../../types';
 
 const MovieGrid = () => {
   const movies = useStore($movies);
@@ -13,6 +14,32 @@ const MovieGrid = () => {
     loadMoreMovies();
   }
 
+  return (
+    <MovieGridPure
+      movies={movies}
+      moviesErrorMsg={moviesErrorMsg}
+      totalMovieResults={totalMovieResults}
+      onClickLoadMore={onClickLoadMore}
+    />
+  )
+}
+
+export default MovieGrid;
+
+
+export type MovieGridPureProps = {
+  movies: Movie[];
+  moviesErrorMsg?: string;
+  totalMovieResults: number;
+  onClickLoadMore: () => void;
+}
+
+export const MovieGridPure = ({
+  movies,
+  moviesErrorMsg,
+  totalMovieResults,
+  onClickLoadMore,
+}: MovieGridPureProps) => {
   return (
     <div className='movie-grid'>
       { moviesErrorMsg && (
@@ -31,5 +58,3 @@ const MovieGrid = () => {
     </div>
   )
 }
-
-export default MovieGrid;

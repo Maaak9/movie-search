@@ -2,18 +2,28 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import MovieSearch from './MovieSearch';
 import { MemoryRouter } from 'react-router-dom';
 
-test('Renders MovieSearch component', () => {
+describe('Component: MovieSearch', () => {
 
-  render(
-    <MemoryRouter>
-      <MovieSearch />
-    </MemoryRouter>
-  );
+  test('Renders MovieSearch component', () => {
+    render(
+      <MemoryRouter>
+        <MovieSearch />
+      </MemoryRouter>
+    );
+    const searchElement = screen.getByRole('textbox', { name: /search/i });
+    expect(searchElement).toBeInTheDocument();
+  });
 
-  const searchElement = screen.getByPlaceholderText('Search for movie title');
-  expect(searchElement).toBeInTheDocument();
+  test('input changed', () => {
+    render(
+      <MemoryRouter>
+        <MovieSearch />
+      </MemoryRouter>
+    );
+    const searchElement = screen.getByRole('textbox', { name: /search/i });
+    expect(searchElement).toBeInTheDocument();
+    fireEvent.change(searchElement, { target: { value: 'Harry' }});
+    expect(screen.getByDisplayValue('Harry')).toBeInTheDocument();
+  })
 
-  fireEvent.change(searchElement, { target: { value: 'Harry' }});
-  expect(screen.getByDisplayValue('Harry')).toBeInTheDocument();
-
-});
+})

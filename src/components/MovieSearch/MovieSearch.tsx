@@ -28,7 +28,10 @@ const MovieSearch = () => {
 
   return (
     <div className="search">
+      <label htmlFor='search'>Search</label>
       <input
+        id="search"
+        name="search"
         defaultValue={searchTerm || ''}
         placeholder='Search for movie title'
         onChange={onChangeSearch}
