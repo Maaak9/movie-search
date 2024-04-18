@@ -120,29 +120,3 @@ describe('Component: MoviesRoute', () => {
     })
   })
 })
-
-// test('Renders Movies Route', async() => {
-//   render(
-//     <MemoryRouter>
-//       <MoviesRoute />
-//     </MemoryRouter>
-//   );
-
-//   const searchElement = screen.getByPlaceholderText('Search for movie title');
-//   expect(searchElement).toBeInTheDocument();
-
-//   fireEvent.change(searchElement, { target: { value: 'Harry' }});
-//   expect(screen.getByDisplayValue('Harry')).toBeInTheDocument();
-
-//   const firstMovie = await screen.findByText(/Harry Potter and the Deathly Hallows: Part 2/i);
-//   expect(firstMovie).toBeInTheDocument();
-
-//   const loadMoreButton = screen.getByText('Load more');
-//   expect(loadMoreButton).toBeInTheDocument();
-
-//   const movies = $movies.get()
-//   $movies.set(movies.concat(mockedData));
-
-//   const updatedMovies = $movies.get()
-//   expect(updatedMovies.length).toBe(20);
-// });
